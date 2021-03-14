@@ -20,6 +20,14 @@ class BlogController extends Controller
             'body' => $request->body
         ]);
 
-        return back;
+        return back();
+    }
+    public function get_post($id){
+        $post = Post::find($id);
+
+        if($post == null)
+            return response(['message' => 'post unexisted'], 404);
+
+        return view('post.detail')->with(['post' => $post]);
     }
 }
